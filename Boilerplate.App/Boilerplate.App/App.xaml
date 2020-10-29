@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Boilerplate.App.App"
+             xmlns:effects="clr-namespace:Boilerplate.App.Effects;assembly=Boilerplate.App"
+             xmlns:converters="clr-namespace:Boilerplate.App.Converters;assembly=Boilerplate.App" >
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="AppBlue">#398BCB</Color>
+            <Color x:Key="AppLightBlue">#3399CC</Color>
+            <Color x:Key="AppLightGray">#F2F2F2</Color>
+            <Color x:Key="AppGray">#D9D9D9</Color>
+            <Color x:Key="AppDarkGray">#5E5E5E</Color>
+            <Color x:Key="AppInvalid">#FFCCCC</Color>
+
+            <x:Int32 x:Key="SmallCornerRadius">4</x:Int32>
+            <x:Int32 x:Key="MediumCornerRadius">8</x:Int32>
+            <x:Int32 x:Key="LargeCornerRadius">16</x:Int32>
+
+            <converters:DateTimeToStringConverter x:Key="DateTimeToString" />
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+
+            <Style x:Key="BaseGridLayout" TargetType="Grid">
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="RowSpacing" Value="5" />
+                <Setter Property="ColumnSpacing" Value="5" />
+            </Style>
+
+            <Style x:Key="LightGraySmallCornerEntry" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppLightGray}" />
+                <Setter Property="effects:RoundCornersEffect.CornerRadius" Value="{StaticResource SmallCornerRadius}" />
+            </Style>
+
+            <Style x:Key="LightGraySmallCornerEditor" TargetType="Editor">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppLightGray}" />
+                <Setter Property="effects:RoundCornersEffect.CornerRadius" Value="{StaticResource SmallCornerRadius}" />
+            </Style>
+
+            <Style x:Key="MenuButtons" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppLightBlue}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="Subtitle" />
+                <Setter Property="effects:RoundCornersEffect.CornerRadius" Value="{StaticResource MediumCornerRadius}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       mc:Ignorable="d"
+                       xmlns:pages="clr-namespace:Boilerplate.App.Views.Base;assembly=Boilerplate.App"
+                       x:Class="Boilerplate.App.Views.Samples.SamplePage"
+                       Title="{Binding Title}"
+                       Visual="Custom">
+    <ContentPage.Content>
+        <Grid Style="{StaticResource BaseGridLayout}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0"
+                         VerticalOptions="Center">
+                <Label FontSize="Large"
+                       TextColor="{StaticResource AppDarkGray}"
+                       HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="This is a "/>
+                            <Span Text="{Binding Title}" FontAttributes="Bold" FontSize="Large"/>
+                            <Span Text="."/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="You can navigate back from it by using the navigation bar or hardware back buttons."
+                       IsVisible="{Binding IsModeless}"
+                       FontSize="Medium"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="The only way to navigate back is by using the provided button below."
+                       IsVisible="{Binding IsModeless, Converter={StaticResource InverseBoolConverter}}"
+                       FontSize="Medium"
+                       HorizontalTextAlignment="Center"/>
+                
+            </StackLayout>
+            
+            <Button Grid.Row="1"
+                    Text="Close"
+                    Command="{Binding BackCommand}"
+                    IsVisible="{Binding IsModeless, Converter={StaticResource InverseBoolConverter}}"
+                    TextColor="White"
+                    BackgroundColor="{StaticResource AppLightBlue}"/>
+
+            <ActivityIndicator Grid.RowSpan="2"
+                               Color="{StaticResource AppBlue}"
+                               InputTransparent="True"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Fill"
+                               IsRunning="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</pages:BaseContentPage>

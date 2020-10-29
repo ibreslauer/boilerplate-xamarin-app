@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       mc:Ignorable="d"
+                       xmlns:pages="clr-namespace:Boilerplate.App.Views.Base;assembly=Boilerplate.App" 
+                       xmlns:triggers="clr-namespace:Boilerplate.App.Triggers"
+                       x:Class="Boilerplate.App.Views.LoginPage"
+                       NavigationPage.HasNavigationBar="false"
+                       Visual="Custom">
+    <ContentPage.Content>
+        <Grid Style="{StaticResource BaseGridLayout}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" Grid.ColumnSpan="2"
+                         Padding="0, 20">
+                <Image Source="boilerplate_logo.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding LogoTappedCommand}"
+                            NumberOfTapsRequired="2" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="2"
+                         Margin="60, 0"
+                         Orientation="Vertical"
+                         Spacing="10">
+                <Label IsVisible="{Binding IsUsernameSet}"
+                       FontSize="Caption"
+                       TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding UserName.Value, StringFormat='Logging in as {0}.'}" />
+                            <Span Text=" "/>
+                            <Span Text="Change user?"
+                                  TextColor="Blue"
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ChangeUserCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Entry IsVisible="{Binding IsUsernameSet, Converter={StaticResource InverseBoolConverter}}"
+                       Keyboard="Text"
+                       ReturnType="Next"
+                       ClearButtonVisibility="WhileEditing"
+                       Placeholder="Username"
+                       FontSize="Title"
+                       Text="{Binding UserName.Value, Mode=TwoWay}" 
+                       Style="{StaticResource LightGraySmallCornerEntry}">
+                    <Entry.Triggers>
+                        <DataTrigger TargetType="Entry"
+                                     Binding="{Binding IsUsernameSet, Converter={StaticResource InverseBoolConverter}}"
+                                     Value="True">
+                            <DataTrigger.EnterActions>
+                                <triggers:FocusEntryTriggerAction Focused="True" />
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <triggers:FocusEntryTriggerAction Focused="False" />
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Entry"
+                                     Binding="{Binding UserName.IsValid}"
+                                     Value="False">
+                            <Setter Property="BackgroundColor" Value="{StaticResource AppInvalid}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+
+                <Entry Text="{Binding Password.Value, Mode=TwoWay}" 
+                       Placeholder="Password"
+                       IsPassword="True"
+                       Keyboard="Default"
+                       ReturnType="Go"
+                       ReturnCommand="{Binding LoginCommand}"
+                       ClearButtonVisibility="WhileEditing"                       
+                       FontSize="Title"                       
+                       Style="{StaticResource LightGraySmallCornerEntry}">
+                    <Entry.Triggers>
+                        <DataTrigger 
+                        TargetType="Entry"
+                        Binding="{Binding Password.IsValid}"
+                        Value="False">
+                            <Setter Property="BackgroundColor" Value="{StaticResource AppInvalid}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Label FontSize="Caption"
+                       TextColor="Black"
+                       HorizontalTextAlignment="End"
+                       VerticalTextAlignment="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="...or " />
+                            <Span Text="skip login"
+                                  TextColor="Blue"
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SkipLoginCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text="." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <Button Grid.Row="2" Grid.Column="0"
+                    BackgroundColor="{StaticResource AppGray}"
+                    TextColor="{StaticResource AppDarkGray}" 
+                    Text="Settings"
+                    Command="{Binding SettingsCommand}" />
+            <Button Grid.Row="2" Grid.Column="1"
+                    BackgroundColor="{StaticResource AppLightBlue}"
+                    TextColor="White" 
+                    Text="LOGIN"
+                    Command="{Binding LoginCommand}"/>
+
+            <ActivityIndicator Grid.RowSpan="3" Grid.ColumnSpan="2"
+                               Color="{StaticResource AppBlue}"
+                               InputTransparent="True"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Fill"
+                               IsRunning="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</pages:BaseContentPage>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:Boilerplate.App.Behaviors"
+             xmlns:templates="clr-namespace:Boilerplate.App.Templates" 
+             xmlns:custom="clr-namespace:Boilerplate.App.CustomControls"
+             mc:Ignorable="d"
+             x:Class="Boilerplate.App.Views.AppRootMenuPage"
+             Title="Master"
+             Visual="Custom">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="0"
+               Padding="0">
+                <FlexLayout Direction="Column"
+                            Wrap="NoWrap">
+                <Image Source="boilerplate_logo.png"
+                       FlexLayout.Shrink="10"/>
+                <Label Text="{Binding WelcomeText}"
+                       Padding="10, 0, 0, 5"
+                       FontSize="Caption"
+                       FlexLayout.Shrink="1"/>
+            </FlexLayout>
+        </Frame>
+
+        <StackLayout Grid.Row="1">
+            <ListView ItemsSource="{Binding MenuItems}"
+                      CachingStrategy="RetainElement"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" 
+                        Command="{Binding MenuItemTappedCommand}">
+                    </behaviors:EventToCommandBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <custom:CustomViewCell SelectedItemBackgroundColor="{StaticResource AppLightGray}">
+                            <templates:MenuItemTemplate />
+                        </custom:CustomViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+        <ActivityIndicator Grid.RowSpan="2"
+                           Color="{StaticResource AppBlue}"
+                           InputTransparent="True"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Fill"
+                           IsRunning="{Binding IsBusy}"/>
+    </Grid>
+</ContentPage>
