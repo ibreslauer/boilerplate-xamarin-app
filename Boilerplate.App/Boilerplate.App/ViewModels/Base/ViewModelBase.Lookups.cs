@@ -10,8 +10,6 @@ namespace Boilerplate.App.ViewModels.Base
     {
         public Task<TR> ShowLookupPageAsync<TViewModel, TR>() where TViewModel : ViewModelBase, ILookup<TR>
         {
-            if (IsBusy) return Task.FromResult(default(TR));
-
             var diagResult = new TaskCompletionSource<TR>();
             new Action(async () =>
             {

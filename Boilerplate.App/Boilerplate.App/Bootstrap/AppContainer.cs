@@ -25,6 +25,7 @@ namespace Boilerplate.App.Bootstrap
             builder.RegisterType<AppRootViewModel>();
             builder.RegisterType<AppRootMenuViewModel>();
             builder.RegisterType<MainMenuViewModel>();
+            builder.RegisterType<AboutViewModel>();
             builder.RegisterType<SampleViewModel>();
             builder.RegisterType<SamplePopupViewModel>();
             builder.RegisterType<SampleLookupViewModel>();

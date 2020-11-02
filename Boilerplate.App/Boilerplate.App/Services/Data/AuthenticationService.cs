@@ -39,7 +39,7 @@ namespace Boilerplate.App.Services.Data
                 var response = await GenericRepository.PutAsync(uri,
                     new TokenModel
                     {
-                        UserId = SettingsService.DeviceUser.Id,
+                        UserId = SettingsService.CurrentUser.Id,
                         DeviceId = AppRuntime.DEVICE_ID.Value,
                         Token = SettingsService.AccessToken
                     },

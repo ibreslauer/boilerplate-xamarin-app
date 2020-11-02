@@ -20,7 +20,7 @@
             <StackLayout Grid.Row="0"
                          VerticalOptions="Center"
                          Padding="30, 0"
-                         Spacing="30">                
+                         Spacing="15">                
                 <Button Text="Open Modeless page"
                         Command="{Binding ModelessCommand}"
                         BackgroundColor="{StaticResource AppLightBlue}"

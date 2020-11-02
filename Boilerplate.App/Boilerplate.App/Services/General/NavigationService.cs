@@ -100,6 +100,19 @@ namespace Boilerplate.App.Services.General
             await vm?.InitializeAsync(parameter);
         }
 
+        public async Task NavigateToModalAsync(Type viewModelType, object parameter = null, bool showNavBar = false)
+        {
+            Page page = CreateAndBindPage(viewModelType, PageNavigationMode.Modal);
+            var vm = page.BindingContext as ViewModelBase;
+            if (showNavBar)
+            {
+                page = new NavigationPage(page);
+                AddCustomPageEventHandlers(page as NavigationPage, (page as NavigationPage).CurrentPage);
+            }
+            await Navigation.PushModalAsync(page);
+            await vm?.InitializeAsync(parameter);
+        }
+
         public async Task NavigateToModalAsync<TViewModel>(TViewModel viewModel, object parameter = null, bool showNavBar = false) where TViewModel : ViewModelBase
         {
             Page page = CreateAndBindPageWithViewModel(viewModel, PageNavigationMode.Modal);
@@ -115,6 +128,21 @@ namespace Boilerplate.App.Services.General
         public async Task NavigateToPopupAsync<TViewModel>(object parameter = null) where TViewModel : ViewModelBase
         {
             Page page = CreateAndBindPage(typeof(TViewModel), PageNavigationMode.Popup);
+            var vm = page.BindingContext as ViewModelBase;
+            if (page is BasePopupPage popupPage)
+            {
+                await Navigation.PushPopupAsync(popupPage);
+                await vm?.InitializeAsync(parameter);
+            }
+            else
+            {
+                throw new InvalidOperationException($"{page.GetType().Name} is not of type PopupPage.");
+            }
+        }
+        
+        public async Task NavigateToPopupAsync(Type viewModelType, object parameter = null)
+        {
+            Page page = CreateAndBindPage(viewModelType, PageNavigationMode.Popup);
             var vm = page.BindingContext as ViewModelBase;
             if (page is BasePopupPage popupPage)
             {

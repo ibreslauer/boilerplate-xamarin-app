@@ -9,10 +9,14 @@
     <ContentView.Content>
         <StackLayout Orientation="Vertical">
             <StackLayout>
-                <Label Padding="15, 15"
-                       VerticalOptions="Center" FontSize="Subtitle" Text="{Binding MenuText}"/>
+                <Label Padding="15, 20"
+                       Text="{Binding MenuText}"
+                       VerticalOptions="CenterAndExpand"
+                       FontSize="Subtitle"/>
             </StackLayout>            
-            <BoxView IsVisible="{Binding HasSeparator}" HeightRequest="1" Color="{StaticResource AppGray}" />
+            <BoxView IsVisible="{Binding HasSeparator}" 
+                     HeightRequest="1"
+                     Color="{StaticResource AppGray}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

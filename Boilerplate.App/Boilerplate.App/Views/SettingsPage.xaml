@@ -12,8 +12,8 @@
     <ContentPage.Content>
         <Grid Style="{StaticResource BaseGridLayout}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>

@@ -46,7 +46,7 @@ namespace Boilerplate.App.ViewModels
             _authSvc = authenticationService;
 
             _userName = new ValidatableObject<string>();
-            UserName.Value = AppSettings.DeviceUser?.Email;
+            UserName.Value = AppSettings.CurrentUser?.Email;
 
             _password = new ValidatableObject<string>();
 
@@ -59,7 +59,7 @@ namespace Boilerplate.App.ViewModels
         {
             MessagingCenter.Subscribe<SettingsViewModel>(this, AppConstants.MSG_SETTINGS_SAVED, (sender) =>
             {
-                UserName.Value = AppSettings.DeviceUser?.Email;
+                UserName.Value = AppSettings.CurrentUser?.Email;
                 OnPropertyChanged(nameof(IsUsernameSet));
             });
         }
@@ -110,7 +110,7 @@ namespace Boilerplate.App.ViewModels
                     return;
                 }
 
-                AppSettings.DeviceUser = authResult.User;
+                AppSettings.CurrentUser = authResult.User;
                 ClearPage();
 
                 if (PageNavigationMode == PageNavigationMode.Modal)

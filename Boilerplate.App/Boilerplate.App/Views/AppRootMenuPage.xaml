@@ -18,15 +18,14 @@
 
         <Frame Grid.Row="0"
                Padding="0">
-                <FlexLayout Direction="Column"
-                            Wrap="NoWrap">
+            <StackLayout VerticalOptions="EndAndExpand"
+                         Padding="0, 5">
                 <Image Source="boilerplate_logo.png"
-                       FlexLayout.Shrink="10"/>
+                       HeightRequest="100"/>
                 <Label Text="{Binding WelcomeText}"
-                       Padding="10, 0, 0, 5"
-                       FontSize="Caption"
-                       FlexLayout.Shrink="1"/>
-            </FlexLayout>
+                       Padding="10, 0"
+                       FontSize="Caption"/>
+            </StackLayout>
         </Frame>
 
         <StackLayout Grid.Row="1">

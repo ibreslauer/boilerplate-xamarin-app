@@ -12,7 +12,7 @@
     <ContentPage.Content>
         <Grid Style="{StaticResource BaseGridLayout}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
@@ -21,16 +21,14 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Row="0" Grid.ColumnSpan="2"
-                         Padding="0, 20">
-                <Image Source="boilerplate_logo.png">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding LogoTappedCommand}"
-                            NumberOfTapsRequired="2" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+            <Image Grid.Row="0" Grid.ColumnSpan="2"
+                   Source="boilerplate_logo.png"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogoTappedCommand}"
+                                          NumberOfTapsRequired="2" />
+                </Image.GestureRecognizers>
+            </Image>
 
             <StackLayout Grid.Row="1" Grid.ColumnSpan="2"
                          Margin="60, 0"

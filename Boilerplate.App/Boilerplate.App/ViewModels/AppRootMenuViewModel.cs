@@ -18,7 +18,7 @@ namespace Boilerplate.App.ViewModels
         private ObservableCollection<AppRootMenuItem> _menuItems;
         private readonly IAuthenticationService _authenticationService;
 
-        public string WelcomeText => $"Welcome, {AppSettings.DeviceUser?.Email}!";
+        public string WelcomeText => $"Welcome, {AppSettings.CurrentUser?.Username}!";
 
         public AppRootMenuViewModel(IAuthenticationService authenticationService)
             : base()
@@ -37,15 +37,15 @@ namespace Boilerplate.App.ViewModels
             set => SetProperty(ref _menuItems, value);
         }
 
-        private async Task OnMenuItemTapped(object menuItemTappedEventArgs)
+        private Task OnMenuItemTapped(object menuItemTappedEventArgs)
         {
             var menuItem = ((menuItemTappedEventArgs as ItemTappedEventArgs)?.Item as AppRootMenuItem);
 
-            if (menuItem?.MenuItemType == MenuItemType.Logout)
+            if (menuItem.MenuItemType == MenuItemType.Logout)
             {
-                await RunAsBusyAsync(async () =>
+                return RunAsBusyAsync(async () =>
                 {
-                    await _authenticationService.LogoutAsync();                    
+                    await _authenticationService.LogoutAsync();
                     try
                     {
                         await NavigationService.ClearBackStackToLogin();
@@ -57,10 +57,19 @@ namespace Boilerplate.App.ViewModels
                 });
             }
 
-            var type = menuItem?.ViewModelToLoad;
-            if (type != null)
+            var type = menuItem.ViewModelToLoad;
+            if (type == null) return Task.CompletedTask;
+
+            switch (menuItem.NavigationMode)
             {
-                await NavigationService.NavigateToAsync(type);
+                case PageNavigationMode.Modeless:
+                    return RunAsBusyAsync(async () => await NavigationService.NavigateToAsync(type));
+                case PageNavigationMode.Modal:
+                    return RunAsBusyAsync(async () => await NavigationService.NavigateToModalAsync(type));
+                case PageNavigationMode.Popup:
+                    return RunAsBusyAsync(async () => await NavigationService.NavigateToPopupAsync(type));
+                default:
+                    return Task.CompletedTask;
             }
         }
 
@@ -68,9 +77,11 @@ namespace Boilerplate.App.ViewModels
         {
             MenuItems.Add(new AppRootMenuItem
             {
-                MenuText = "Open Modeless Page",
-                ViewModelToLoad = typeof(SampleViewModel),
-                MenuItemType = MenuItemType.Page
+                MenuText = "About this app",
+                ViewModelToLoad = typeof(AboutViewModel),
+                NavigationMode = PageNavigationMode.Popup,
+                MenuItemType = MenuItemType.Page,
+                HasSeparator = true
             });
 
             MenuItems.Add(new AppRootMenuItem

@@ -12,8 +12,10 @@ namespace Boilerplate.App.Services.General.Contracts
         Task NavigateToAsync(Type viewModelType);
         Task InsertPageBeforeAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase;
         Task NavigateToModalAsync<TViewModel>(object parameter = null, bool showNavBar = false) where TViewModel : ViewModelBase;
+        Task NavigateToModalAsync(Type viewModelType, object parameter = null, bool showNavBar = false);
         Task NavigateToModalAsync<TViewModel>(TViewModel viewModel, object parameter = null, bool showNavBar = false) where TViewModel : ViewModelBase;
         Task NavigateToPopupAsync<TViewModel>(object parameter = null) where TViewModel : ViewModelBase;
+        Task NavigateToPopupAsync(Type viewModelType, object parameter = null);
         Task NavigateBackPopupAsync();
         Task ClearBackStackToLogin();
         Task NavigateBackModalAsync();

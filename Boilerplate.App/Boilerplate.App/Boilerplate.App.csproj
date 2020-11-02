@@ -17,10 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.462" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.463" />
     <PackageReference Include="akavache" Version="7.1.1" />
     <PackageReference Include="Autofac" Version="6.0.0" />
-    <PackageReference Include="IB.Boilerplate.Common" Version="1.0.0" />
+    <PackageReference Include="IB.Boilerplate.Common" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Polly" Version="7.2.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.6" />
@@ -44,10 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Boilerplate.Common\Boilerplate.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Update="Views\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Samples\SampleLookupPage.xaml.cs">
       <DependentUpon>SampleLookupPage.xaml</DependentUpon>
     </Compile>

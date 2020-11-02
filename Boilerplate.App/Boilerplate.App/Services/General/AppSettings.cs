@@ -8,16 +8,15 @@ namespace Boilerplate.App.Services.General
 {
     public class AppSettings : IAppSettings
     {
-        #region Fields & properties
         private const string ServerUrlKey = "ApiServerUrl";
-        private const string DeviceUserKey = "DeviceUser";
+        private const string CurrentUserKey = "CurrentUser";
         private const string CompanyNameKey = "CompanyName";
         private const string AccessTokenKey = "AccessToken";
 
-        public UserModel DeviceUser
+        public UserModel CurrentUser
         {
-            get => GetItem<UserModel>(DeviceUserKey);
-            set => AddItem(DeviceUserKey, value);
+            get => GetItem<UserModel>(CurrentUserKey);
+            set => AddItem(CurrentUserKey, value);
         }        
         public string CompanyName
         {
@@ -34,10 +33,9 @@ namespace Boilerplate.App.Services.General
             get => GetItem(AccessTokenKey);
             set => AddItem(AccessTokenKey, value);
         }
-        #endregion
 
-        #region Methods
-        public void AddItem(string key, string value)
+        #region Private Methods
+        private void AddItem(string key, string value)
         {
             try
             {
@@ -49,7 +47,7 @@ namespace Boilerplate.App.Services.General
             }
         }
 
-        public string GetItem(string key)
+        private string GetItem(string key)
         {
             var preferenceValue = string.Empty;
             try
@@ -64,7 +62,7 @@ namespace Boilerplate.App.Services.General
             return preferenceValue;
         }
 
-        public void AddItem<T>(string key, T value)
+        private void AddItem<T>(string key, T value)
         {
             try
             {
@@ -77,7 +75,7 @@ namespace Boilerplate.App.Services.General
             }
         }
 
-        public T GetItem<T>(string key)
+        private T GetItem<T>(string key)
         {
             T item = default;
             try
