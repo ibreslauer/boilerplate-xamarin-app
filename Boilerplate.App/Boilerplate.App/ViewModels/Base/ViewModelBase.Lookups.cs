@@ -1,6 +1,6 @@
 ﻿using Boilerplate.App.Bootstrap;
+using Boilerplate.App.Contracts;
 using Boilerplate.Common.Base;
-using Boilerplate.Common.Contracts;
 using System;
 using System.Threading.Tasks;
 

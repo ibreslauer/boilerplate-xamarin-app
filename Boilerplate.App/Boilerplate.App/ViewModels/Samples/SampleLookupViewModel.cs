@@ -1,5 +1,5 @@
-﻿using Boilerplate.App.ViewModels.Base;
-using Boilerplate.Common.Contracts;
+﻿using Boilerplate.App.Contracts;
+using Boilerplate.App.ViewModels.Base;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;

@@ -1,8 +1,8 @@
-﻿using Boilerplate.App.CrossPlatform;
+﻿using Boilerplate.App.Contracts;
+using Boilerplate.App.CrossPlatform;
 using Boilerplate.App.Services.Data.Contracts;
 using Boilerplate.App.ViewModels.Base;
 using Boilerplate.Common.Constants;
-using Boilerplate.Common.Contracts;
 using Boilerplate.Common.Validation;
 using System;
 using System.Linq;
