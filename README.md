@@ -11,4 +11,3 @@ A Xamarin-powered boilerplate app with a set of commonly needed functionalities:
 - Effects (e.g. round corners)
 - Triggers (focus trigger)
 - Custom controls (e.g. lowercased button)
-- ... and much more!
